@@ -9,6 +9,7 @@ public class ShotEnemyBehaviour : SteerableBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("ASASAS");
         if (collision.CompareTag("Inimigos")) return;
 
         IDamageable damageable = collision.gameObject.GetComponent(typeof(IDamageable)) as IDamageable;

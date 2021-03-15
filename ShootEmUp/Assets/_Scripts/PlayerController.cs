@@ -14,11 +14,6 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
     private int lifes;
     public AudioClip shootSFX;
 
-    public float leftWall;
-    public float rightWall;
-    public float bottomWall;
-    public float topWall;
-
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -75,19 +70,6 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
         if (collision.CompareTag("wall"))
         {
             Debug.Log("Bateu numa parede");
-
-            if (transform.position.x < leftWall){
-                transform.position = new Vector2 (-8.31f, transform.position.y);
-            }
-            if (transform.position.x > rightWall){
-                transform.position = new Vector2 (8.31f, transform.position.y);
-            }
-            if (transform.position.y < bottomWall){
-                transform.position = new Vector2 (transform.position.x, -5f);
-            }
-            if (transform.position.y > topWall){
-                transform.position = new Vector2 (transform.position.x, 80.5f);
-            }
         }
     }
 }
