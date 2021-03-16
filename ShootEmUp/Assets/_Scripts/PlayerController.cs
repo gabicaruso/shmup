@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : SteerableBehaviour, IShooter, IDamageable
 {
@@ -11,13 +12,15 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
     public float shootDelay = 0.5f;
     private float _lastShootTimestamp = 0.0f;
 
-    private int lifes;
+    public int lifes;
     public AudioClip shootSFX;
+
+    public GameObject menuPause;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        lifes = 10;
+        lifes = 4;
     }
 
     public void Shoot()
@@ -32,12 +35,13 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
     public void TakeDamage()
     {
         lifes--;
-        if (lifes <= 0) Die();
+        if (lifes <= 0)  Die();
     }
 
     public void Die()
     {
-        Destroy(gameObject);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("FimDeJogo");
     }
 
     void FixedUpdate()
@@ -58,7 +62,30 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
         {
             Shoot();
         }
-    }   
+
+        if (lifes == 4) {
+            animator.SetFloat("Demage", 0.0f);
+        }
+        else if (lifes == 3) {
+            animator.SetFloat("Demage", 1.0f);
+        }
+        else if (lifes == 2) {
+            animator.SetFloat("Demage", 2.0f);
+        }
+        else if (lifes == 1) {
+            animator.SetFloat("Demage", 3.0f);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            Time.timeScale = 0f;
+            menuPause.SetActive(true);
+        }
+    }
+
+    public void Continue(){
+        Time.timeScale = 1f;
+        menuPause.SetActive(false);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -69,7 +96,7 @@ public class PlayerController : SteerableBehaviour, IShooter, IDamageable
         }
         if (collision.CompareTag("wall"))
         {
-            Debug.Log("Bateu numa parede");
+            //Debug.Log("Bateu numa parede");
         }
     }
 }

@@ -6,8 +6,6 @@ public class StatePatrulhaPorWaypoints : State
 {
     public Transform[] waypoints;  
     SteerableBehaviour steerable;
-
-
     
     public override void Awake()
     {

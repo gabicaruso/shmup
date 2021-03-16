@@ -15,7 +15,6 @@ public class VolantBehaviour : SteerableBehaviour, IDamageable
 
     public void TakeDamage()
     {
-        Debug.Log("cadeeee");
         Die();
     }
 

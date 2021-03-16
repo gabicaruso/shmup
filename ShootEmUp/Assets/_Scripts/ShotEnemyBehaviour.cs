@@ -9,7 +9,6 @@ public class ShotEnemyBehaviour : SteerableBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("ASASAS");
         if (collision.CompareTag("Inimigos")) return;
 
         IDamageable damageable = collision.gameObject.GetComponent(typeof(IDamageable)) as IDamageable;
@@ -21,20 +20,20 @@ public class ShotEnemyBehaviour : SteerableBehaviour
 
         if (collision.CompareTag("wall"))
         {
-            Debug.Log("Tiro inimigo bateu numa parede");
+            // Debug.Log("Tiro inimigo bateu numa parede");
         }
     }
 
     void Start()
     {
-        // Vector3 posPlayer = GameObject.FindWithTag("Player").transform.position;
-        // direction = (posPlayer - transform.position).normalized;
+        Vector3 posPlayer = GameObject.FindWithTag("Player").transform.position;
+        direction = (posPlayer - transform.position).normalized;
     }
 
     void Update()
     {
-        Vector3 posPlayer = GameObject.FindWithTag("Player").transform.position;
-        direction = (posPlayer - transform.position).normalized;
+        // Vector3 posPlayer = GameObject.FindWithTag("Player").transform.position;
+        // direction = (posPlayer - transform.position).normalized;
         Thrust(direction.x, direction.y);
     }
 

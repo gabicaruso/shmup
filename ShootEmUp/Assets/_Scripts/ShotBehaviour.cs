@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ShotBehaviour : SteerableBehaviour
 {
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player")) return;
 
-        Debug.Log(collision.gameObject.name);
+        // Debug.Log(collision.gameObject.name);
         IDamageable damageable = collision.gameObject.GetComponent(typeof(IDamageable)) as IDamageable;
         if (!(damageable is null))
         {
@@ -18,8 +19,10 @@ public class ShotBehaviour : SteerableBehaviour
 
         if (collision.CompareTag("wall"))
         {
-            Debug.Log("Tiro bateu numa parede");
+            // Debug.Log("Tiro bateu numa parede");
         }
+
+        // Debug.Log($"Vidas: {gm.vidas} \t | \t Pontos: {gm.pontos}");
     }
 
     private void Update()
